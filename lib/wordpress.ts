@@ -51,6 +51,15 @@ export async function getPostBySlug(slug: string) {
         altText
       }
     }
+    author {
+      node {
+        firstName
+        lastName
+        avatar {
+          url
+        }
+      }
+    }
     categories(first: 1) {
       nodes {
         name
@@ -84,6 +93,23 @@ export function getImageSrcFromPost(post: WordPressPost) {
   return post.featuredImage.node;
 }
 
+export function getAuthorFromPost(post: WordPressPost) {
+  if (!post.author?.node) {
+    return DEFAULT_AUTHOR;
+  }
+
+  return post.author.node;
+}
+
+export function getAvatarFromAuthor(author: WordPressAuthor) {
+  if (!author.avatar || !author.avatar.url) {
+    console.error("NEED A DEFAULT IMAGE FOR AUTHORS");
+    return { url: "test-url" };
+  }
+
+  return author.avatar;
+}
+
 export interface WordPressGetPostResult {
   postBy: WordPressPost;
 }
@@ -97,6 +123,9 @@ export interface WordPressPost {
   content: string;
   featuredImage?: {
     node: WordPressImage;
+  };
+  author?: {
+    node: WordPressAuthor;
   };
   categories?: {
     nodes: WordPressCategoryNode[];
@@ -112,4 +141,18 @@ export interface WordPressImage {
   altText: string;
 }
 
+export interface WordPressAuthor {
+  firstName?: string;
+  lastName?: string;
+  avatar?: WordPressAvatar;
+}
+
+export interface WordPressAvatar {
+  url?: string;
+}
+
 const DEFAULT_CATEGORY = "Uncategorized";
+
+const DEFAULT_AUTHOR: WordPressAuthor = {
+  firstName: "SUSU",
+};
