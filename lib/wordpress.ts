@@ -45,12 +45,43 @@ export async function getPostBySlug(slug: string) {
     id
     title
     content
+    featuredImage {
+      node {
+        sourceUrl
+        altText
+      }
+    }
+    categories(first: 1) {
+      nodes {
+        name
+      }
+    }
   }
 }
 `;
 
   const resp = await wordpressFetch<WordPressGetPostResult>(query);
   return resp;
+}
+
+export function getCategoryFromPost(post: WordPressPost) {
+  if (
+    !post.categories ||
+    !Array.isArray(post.categories.nodes) ||
+    post.categories.nodes.length < 1
+  ) {
+    return DEFAULT_CATEGORY;
+  }
+
+  return post.categories.nodes[0].name;
+}
+
+export function getImageSrcFromPost(post: WordPressPost) {
+  if (!post.featuredImage) {
+    console.log({ post });
+    throw Error("Need a default image");
+  }
+  return post.featuredImage.node;
 }
 
 export interface WordPressGetPostResult {
@@ -64,4 +95,21 @@ export interface WordPressPost {
   title: string;
   /** Post html content*/
   content: string;
+  featuredImage?: {
+    node: WordPressImage;
+  };
+  categories?: {
+    nodes: WordPressCategoryNode[];
+  };
 }
+
+export interface WordPressCategoryNode {
+  name: string;
+}
+
+export interface WordPressImage {
+  sourceUrl: string;
+  altText: string;
+}
+
+const DEFAULT_CATEGORY = "Uncategorized";

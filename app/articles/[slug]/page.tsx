@@ -1,4 +1,9 @@
-import { getPostBySlug } from "@/lib/wordpress";
+import {
+  getCategoryFromPost,
+  getImageSrcFromPost,
+  getPostBySlug,
+} from "@/lib/wordpress";
+import { FeaturedImage } from "./featured-image";
 
 export default async function Article({
   params,
@@ -19,10 +24,13 @@ export default async function Article({
   }
 
   const { postBy: post } = res.data;
-
+  const category = getCategoryFromPost(post);
+  const img = getImageSrcFromPost(post);
   return (
     <div>
-      <h1>{post.title}</h1>
+      <span className="font-bold my-2 block">{category}</span>
+      <h1 className="text-2xl font-serif font-bold">{post.title}</h1>
+      <FeaturedImage img={img} />
       <div dangerouslySetInnerHTML={{ __html: post.content }} />
     </div>
   );
