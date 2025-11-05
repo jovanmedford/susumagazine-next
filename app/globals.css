@@ -3,6 +3,7 @@
 :root {
   --background: #f9f8f3;
   --foreground: #474455;
+  --foreground-light: #aaa7b9;
   --primary-color-500: #3d27a5;
 }
 
@@ -10,6 +11,7 @@
   --color-primary-500: var(--primary-color-500);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-foreground-light: var(--foreground-light);
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
 }
