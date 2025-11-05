@@ -6,6 +6,8 @@ import {
 } from "@/lib/wordpress";
 import { FeaturedImage } from "./featured-image";
 import Author from "./author";
+import styles from "./article.module.css"
+import HorizontalSeparator from "@/app/components/horizontal-separator";
 
 export default async function Article({
   params,
@@ -30,14 +32,15 @@ export default async function Article({
   const img = getImageSrcFromPost(post);
   const author = getAuthorFromPost(post);
   return (
-    <div>
+    <div className="mx-6 max-w-3xl md:mx-auto">
       <div className="flex flex-col gap-2">
         <span className="font-bold block text-primary-500">{category}</span>
         <h1 className="text-2xl font-serif font-bold">{post.title}</h1>
         <Author author={author} />
       </div>
+      <HorizontalSeparator />
       <FeaturedImage img={img} />
-      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+      <div className={styles.article} dangerouslySetInnerHTML={{ __html: post.content }} />
     </div>
   );
 }

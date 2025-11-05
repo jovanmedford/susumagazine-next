@@ -1,0 +1,13 @@
+.article h2 {
+    font-size: var(--text-2xl);
+    margin: calc(var(--spacing) * 5) 0;
+}
+
+.article p {
+    line-height: 1.75rem;
+    margin: 0 0 calc(var(--spacing) * 3)
+}
+
+.article ul {
+    padding-left: 0.5rem;
+}

@@ -9,7 +9,7 @@ export default function Author({ author }: { author: WordPressAuthor }) {
     <div>
       <span>
         By{" "}
-        <span className="font-bold">
+        <span className="font-bold text-sm">
           {author.firstName} {author.lastName}
         </span>
       </span>
