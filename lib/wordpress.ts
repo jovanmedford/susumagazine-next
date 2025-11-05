@@ -82,6 +82,10 @@ export function getCategoryFromPost(post: WordPressPost) {
     return DEFAULT_CATEGORY;
   }
 
+  if (post.categories.nodes[0].name === "Uncategorized") {
+    return DEFAULT_CATEGORY;
+  }
+
   return post.categories.nodes[0].name;
 }
 
@@ -151,7 +155,7 @@ export interface WordPressAvatar {
   url?: string;
 }
 
-const DEFAULT_CATEGORY = "Uncategorized";
+const DEFAULT_CATEGORY = "Article";
 
 const DEFAULT_AUTHOR: WordPressAuthor = {
   firstName: "SUSU",
