@@ -32,7 +32,7 @@ export default async function Article({
   return (
     <div>
       <div className="flex flex-col gap-2">
-        <span className="font-bold block">{category}</span>
+        <span className="font-bold block text-primary-500">{category}</span>
         <h1 className="text-2xl font-serif font-bold">{post.title}</h1>
         <Author author={author} />
       </div>
