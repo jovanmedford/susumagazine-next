@@ -1,5 +1,6 @@
 .article h2 {
     font-size: var(--text-2xl);
+    font-weight: 700;
     margin: calc(var(--spacing) * 5) 0;
 }
 
