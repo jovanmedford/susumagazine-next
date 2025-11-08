@@ -1,5 +1,6 @@
 // Description: WordPress API functions
 
+import site from "@/site";
 import { failure, Result, success } from "./util";
 
 // Used to fetch data from a WordPress site using the WordPress REST API
@@ -45,6 +46,9 @@ export async function getPostBySlug(slug: string) {
     id
     title
     content
+    additionalPostData {
+      excerpt
+    }
     featuredImage {
       node {
         sourceUrl
@@ -102,7 +106,20 @@ export function getAuthorFromPost(post: WordPressPost) {
     return DEFAULT_AUTHOR;
   }
 
+  if (!post.author.node.lastName) {
+    return { ...post.author.node, lastName: "" };
+  }
+
   return post.author.node;
+}
+
+export function getExcerptFromPost(post: WordPressPost) {
+  let excerpt = post?.additionalPostData?.excerpt;
+  if (!excerpt) {
+    return site.description;
+  }
+
+  return excerpt;
 }
 
 export function getAvatarFromAuthor(author: WordPressAuthor) {
@@ -125,6 +142,11 @@ export interface WordPressPost {
   title: string;
   /** Post html content*/
   content: string;
+  /** Metadata */
+  additionalPostData?: {
+    /** Metadata Description */
+    excerpt: string;
+  };
   featuredImage?: {
     node: WordPressImage;
   };

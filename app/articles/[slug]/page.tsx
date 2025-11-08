@@ -1,6 +1,7 @@
 import {
   getAuthorFromPost,
   getCategoryFromPost,
+  getExcerptFromPost,
   getImageSrcFromPost,
   getPostBySlug,
 } from "@/lib/wordpress";
@@ -11,6 +12,46 @@ import HorizontalSeparator from "@/app/components/horizontal-separator";
 import Container from "@/app/components/container";
 import Header from "@/app/components/header/header";
 import Footer from "@/app/components/footer";
+import { Metadata } from "next";
+import site from "@/site";
+import { notFound } from "next/navigation";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  let res = await getPostBySlug(slug);
+
+  if (!res.ok || !res.data?.postBy) {
+    notFound();
+  }
+
+  const { postBy: post } = res.data;
+  const title = post.title ?? site.title;
+  const description = getExcerptFromPost(post);
+  const author = getAuthorFromPost(post);
+  const img = getImageSrcFromPost(post);
+  const canonical = `${site.url}/articles/${slug}`;
+
+  return {
+    metadataBase: new URL(site.url),
+    title,
+    description,
+    publisher: "SUSU Magazine",
+    authors: [{ name: `${author.firstName} ${author.lastName}` }],
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      images: [{ url: img.sourceUrl, width: 800, height: 600 }],
+    },
+  };
+}
 
 export default async function Article({
   params,
@@ -21,16 +62,12 @@ export default async function Article({
 
   let res = await getPostBySlug(slug);
 
-  if (!res.ok) {
-    return (
-      <div>
-        <h1>An Error Occured</h1>
-        <p>{res.message}</p>
-      </div>
-    );
+  if (!res.ok || !res.data?.postBy) {
+    notFound();
   }
 
   const { postBy: post } = res.data;
+
   const category = getCategoryFromPost(post);
   const img = getImageSrcFromPost(post);
   const author = getAuthorFromPost(post);
