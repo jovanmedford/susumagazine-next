@@ -1,19 +1,19 @@
 import Container from "../container";
 import HorizontalSeparator from "../horizontal-separator";
-import SusuLink from "../susu-link";
+import HeaderLink from "./header-link";
 
 export default function HeaderNavbar() {
   return (
     <>
       <HorizontalSeparator />
-      <Container as="nav" className="flex justify-center overflow-auto">
-        <ol className="flex gap-4">
+      <Container as="nav">
+        <ul className="w-full justify-center-safe overflow-auto flex gap-4">
           {links.map((link) => (
             <li key={link.label}>
-              <SusuLink href={link.href}>{link.label}</SusuLink>
+              <HeaderLink href={link.href}>{link.label}</HeaderLink>
             </li>
           ))}
-        </ol>
+        </ul>
       </Container>
       <HorizontalSeparator />
     </>
