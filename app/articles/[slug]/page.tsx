@@ -10,6 +10,7 @@ import styles from "./article.module.css";
 import HorizontalSeparator from "@/app/components/horizontal-separator";
 import Container from "@/app/components/container";
 import Header from "@/app/components/header/header";
+import Footer from "@/app/components/footer";
 
 export default async function Article({
   params,
@@ -49,6 +50,7 @@ export default async function Article({
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
       </Container>
+      <Footer />
     </section>
   );
 }
