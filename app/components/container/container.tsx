@@ -2,7 +2,7 @@ import { ElementType, PropsWithChildren } from "react";
 
 export default function Container({
   as: ContainerTag = "div",
-  className,
+  className="",
   children,
 }: ContainerProps) {
   return (

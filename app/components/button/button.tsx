@@ -5,7 +5,7 @@ export default function Button({
   variant = "default",
   icon: Icon,
   children,
-  className,
+  className="",
   ...delegated
 }: ButtonProps) {
   const variantClass = variant === "emphasized" ? styles["btn-emphasized"] : "";
