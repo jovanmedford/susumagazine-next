@@ -1,6 +1,7 @@
 import { getPageBySlug } from "@/lib/wordpress";
 import Header from "./components/header";
 import FeaturedGrid from "./components/featured-grid";
+import AroundTheMovement from "./around-the-movement";
 
 export default async function Home() {
   let res = await getPageBySlug("home");
@@ -15,6 +16,7 @@ export default async function Home() {
       <Header />
       <main className="mt-4">
         <FeaturedGrid articles={data?.featured?.nodes} />
+        <AroundTheMovement />
       </main>
     </div>
   );
