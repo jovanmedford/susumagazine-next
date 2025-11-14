@@ -5,7 +5,7 @@ import {
   getImageSrcFromPost,
   getPostBySlug,
 } from "@/lib/wordpress";
-import { FeaturedImage } from "./featured-image";
+import FeaturedImage from "@/app/components/wordpress-image";
 import Author from "./author";
 import styles from "./article.module.css";
 import HorizontalSeparator from "@/app/components/horizontal-separator";
@@ -81,7 +81,7 @@ export default async function Article({
           <Author author={author} />
         </div>
         <HorizontalSeparator />
-        <FeaturedImage img={img} />
+        <FeaturedImage img={img} loading="eager" width={1600} height={900} />
         <div
           className={styles.article}
           dangerouslySetInnerHTML={{ __html: post.content }}

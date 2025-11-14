@@ -29,6 +29,7 @@ async function wordpressFetch<T>(query?: string): Promise<Result<T>> {
     }
 
     const res = (await response.json()) as WordPressResponse<T>;
+
     return success(res.data);
   } catch (e) {
     console.error(e);
@@ -37,6 +38,65 @@ async function wordpressFetch<T>(query?: string): Promise<Result<T>> {
     }
     return failure("An error occured");
   }
+}
+
+export async function getPageBySlug(slug: string) {
+  const postData = /* GraphQL */ `
+    nodes {
+       ... on Post {
+      id
+      slug
+      title
+      author {
+        node {
+          firstName
+          lastName
+          avatar {
+            url
+          }
+        }
+      }
+      categories(first: 1) {
+        nodes {
+          name
+        }
+      }
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      additionalPostData {
+        excerpt
+      }
+    }
+  }
+  `;
+  const query = /* GraphQL */ `
+    query GetDynamicPage {
+      dynamicPageBy(id: "cG9zdDoxMDM1") {
+        id
+        slug
+        title
+        pageData {
+          blocks {
+            featured {
+              ${postData}
+            }
+            primary {
+              ${postData}
+            }
+            secondary {
+              ${postData}
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const resp = await wordpressFetch<WordPressGetDynamicPageResult>(query);
+  return resp;
 }
 
 export async function getPostBySlug(slug: string) {
@@ -77,6 +137,10 @@ export async function getPostBySlug(slug: string) {
   return resp;
 }
 
+export function getLinkFromPost(post: WordPressPost) {
+  return `/articles/${post.slug}`;
+}
+
 export function getCategoryFromPost(post: WordPressPost) {
   if (
     !post.categories ||
@@ -96,7 +160,7 @@ export function getCategoryFromPost(post: WordPressPost) {
 export function getImageSrcFromPost(post: WordPressPost) {
   if (!post.featuredImage) {
     console.log({ post });
-    throw Error("Need a default image");
+    throw Error(`Need a default image ${post.title}`);
   }
   return post.featuredImage.node;
 }
@@ -142,13 +206,16 @@ export interface WordPressPost {
   title: string;
   /** Post html content*/
   content: string;
+  /** Post slug */
+  slug: string;
   /** Metadata */
   additionalPostData?: {
     /** Metadata Description */
     excerpt: string;
   };
+
   featuredImage?: {
-    node: WordPressImage;
+    node: WordPressImageData;
   };
   author?: {
     node: WordPressAuthor;
@@ -158,11 +225,27 @@ export interface WordPressPost {
   };
 }
 
+export interface WordPressGetDynamicPageResult {
+  dynamicPageBy: {
+    pageData: {
+      blocks: {
+        featured: WordPressPageBlock;
+        primary: WordPressPageBlock;
+        secondary: WordPressPageBlock;
+      };
+    };
+  };
+}
+
+export interface WordPressPageBlock {
+  nodes: WordPressPost[];
+}
+
 export interface WordPressCategoryNode {
   name: string;
 }
 
-export interface WordPressImage {
+export interface WordPressImageData {
   sourceUrl: string;
   altText: string;
 }

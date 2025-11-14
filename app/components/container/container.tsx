@@ -7,7 +7,7 @@ export default function Container({
 }: ContainerProps) {
   return (
     <ContainerTag
-      className={`mx-6 lg:max-w-4xl lg:mx-auto xl:max-w-5xl ${className}`}
+      className={`mx-6 lg:max-w-5xl lg:mx-auto xl:max-w-6xl ${className}`}
     >
       {children}
     </ContainerTag>
