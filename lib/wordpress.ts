@@ -165,16 +165,28 @@ export function getImageSrcFromPost(post: WordPressPost) {
   return post.featuredImage.node;
 }
 
-export function getAuthorFromPost(post: WordPressPost) {
-  if (!post.author?.node) {
+export function getAuthorFromPost(post: WordPressPost): WordPressAuthorClean {
+  let author = post.author?.node;
+
+  if (!author || !author.firstName) {
     return DEFAULT_AUTHOR;
   }
 
-  if (!post.author.node.lastName) {
-    return { ...post.author.node, lastName: "" };
-  }
+  let firstName = author.firstName;
+  let lastName = author?.lastName ? author.lastName : "";
+  let sourceUrl = author.avatar?.url
+    ? author.avatar.url
+    : DEFAULT_AUTHOR.avatar.sourceUrl;
+  let altText = `${firstName} portrait`;
 
-  return post.author.node;
+  return {
+    firstName,
+    lastName,
+    avatar: {
+      sourceUrl,
+      altText,
+    },
+  };
 }
 
 export function getExcerptFromPost(post: WordPressPost) {
@@ -256,12 +268,26 @@ export interface WordPressAuthor {
   avatar?: WordPressAvatar;
 }
 
+export interface WordPressAuthorClean {
+  firstName: string;
+  lastName: string;
+  avatar: WordPressAvatarClean;
+}
+
 export interface WordPressAvatar {
   url?: string;
 }
 
+export interface WordPressAvatarClean extends WordPressImageData {}
+
 const DEFAULT_CATEGORY = "Article";
 
-const DEFAULT_AUTHOR: WordPressAuthor = {
+const DEFAULT_AUTHOR: WordPressAuthorClean = {
   firstName: "SUSU",
+  lastName: "",
+  avatar: {
+    altText: "SUSU portrait",
+    sourceUrl:
+      "http://susu.flywheelsites.com/wp-content/uploads/2025/11/SUSU-Logo.png",
+  },
 };
