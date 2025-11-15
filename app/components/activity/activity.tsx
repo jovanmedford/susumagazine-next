@@ -9,8 +9,8 @@ export default function Activity({ activity }: ActivityProps) {
           <Image
             src={activity.imgSrc}
             alt={activity.imgAlt}
-            width={120}
-            height={120}
+            width={60}
+            height={60}
           />
         </div>
         <div>
