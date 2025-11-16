@@ -5,12 +5,12 @@ export default function Activity({ activity }: ActivityProps) {
   return (
     <Link href={activity.to}>
       <div className="flex gap-4 pr-4">
-        <div>
+        <div className="relative w-20 h-20 round-full">
           <Image
             src={activity.imgSrc}
             alt={activity.imgAlt}
-            width={60}
-            height={60}
+            fill
+            objectFit="contain"
           />
         </div>
         <div>
