@@ -1,0 +1,111 @@
+import { DirectoryListing } from "@/app/types";
+
+const directoryListings: DirectoryListing[] = [
+  {
+    name: "AffinityPlus Credit Union Ltd",
+    addressLineOne: "Walcott Brooks Building",
+    addressLineTwo: "Fairchild Street, St Michael BB11015",
+    phoneNumber: "436-5600",
+    email: "info@affinityplusbb.com",
+  },
+  {
+    name: "B’dos Co-operative & Credit Union League Ltd",
+    addressLineOne: "T&T Floor, Co-operators General Insurance Building",
+    addressLineTwo: "Upper Collymore Rock, St Michael",
+    phoneNumber: "429-7075",
+    email: "bcul@barbadoscoopleague.org",
+  },
+  {
+    name: "B’dos Protective Services Co-op Credit Union Ltd",
+    addressLineOne: "Nexus House",
+    addressLineTwo: "Lightfoot Lane, Bridgetown",
+    phoneNumber: "436-9364",
+    email: "admin@psccu.com",
+  },
+  {
+    name: "B’dos Teachers Co-operative Credit Union Ltd",
+    addressLineOne: "John Lovell Building",
+    addressLineTwo: "Lower Collymore Rock, St Michael",
+    phoneNumber: "426-3657",
+    email: "barbteacherscredit@caribsurf.com",
+  },
+  {
+    name: "Bartel Credit Union Ltd",
+    addressLineOne: "Violet House",
+    addressLineTwo: "Upper Collymore Rock, St Michael",
+    phoneNumber: "435-2239",
+    email: "bartelcreditunionltd@caribsurf.com",
+  },
+  {
+    name: "B E T Co-operative Credit Union Ltd",
+    addressLineOne: "Corner 5th Ave Belleville & Pine Road Street",
+    addressLineTwo: "St Michael",
+    phoneNumber: "430-8870",
+    email: "betcreditunion@caribsurf.com",
+  },
+  {
+    name: "City of Bridgetown Co-op Credit Union Ltd",
+    addressLineOne: "Lower Broad Street",
+    addressLineTwo: "Bridgetown",
+    phoneNumber: "430-5900",
+    email: "cobaccountsweb@cob.com.bb",
+  },
+  {
+    name: "Endeavour Co-op Credit Union Ltd",
+    addressLineOne: "Harrison Road",
+    addressLineTwo: "Belmont Road, St Michael",
+    phoneNumber: "427-2902",
+    email: "endeavour_coop@caribsurf.com",
+  },
+  {
+    name: "Financial Services Commission",
+    addressLineOne: "Bay Corporate Building",
+    addressLineTwo: "Bay Street, St Michael BB14038",
+    phoneNumber: "421-2412",
+    email: "info@fsc.gov.bb",
+  },
+  {
+    name: "Lifetime Co-operative Credit Union Ltd",
+    addressLineOne: "1st Floor James Fort Building",
+    addressLineTwo: "Hincks Street & James Street",
+    phoneNumber: "431-0898",
+    email: "lifetime@caribsurf.com",
+  },
+  {
+    name: "Light & Power Employees Co-operative Credit Union Ltd",
+    addressLineOne: "Pine Hill Complex",
+    addressLineTwo: "Bush Hill, The Garrison, St Michael",
+    phoneNumber: "431-1401",
+    email: "lpcreditunion@caribsurf.com",
+  },
+  {
+    name: "Public Transport Co-op Credit Union Ltd",
+    addressLineOne: "43R Roebuck Street",
+    addressLineTwo: "Bridgetown",
+    phoneNumber: "436-2846",
+    email: "",
+  },
+  {
+    name: "Relco Co-operative Credit Union Ltd",
+    addressLineOne: "P.O. Box 1203, 'Nation House'",
+    addressLineTwo: "Fontabelle, St Michael",
+    phoneNumber: "430-1914",
+    email: "relcocreditunion@caribsurf.com",
+  },
+  {
+    name: "United Enterprise Credit Union Ltd",
+    addressLineOne: "Co-operators General Insurance Company Complex",
+    addressLineTwo: "Collymore Rock, St Michael",
+    phoneNumber: "426-4257",
+    email: "uecul@caribsurf.com",
+  },
+  {
+    name: "U.W.I. (Cave Hill) Co-op Credit Union Ltd",
+    addressLineOne: "University Drive",
+    addressLineTwo: "Cave Hill, St Michael",
+    phoneNumber: "417-4359",
+    email: "",
+  },
+];
+
+export default directoryListings;
