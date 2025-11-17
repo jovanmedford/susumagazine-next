@@ -4,6 +4,7 @@ import MenuButton from "../menu-button";
 import SearchButton from "../search-button";
 import HeaderNavbar from "./header-navbar";
 import Container from "../container";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -13,9 +14,9 @@ export default function Header() {
           <MenuButton />
           <SearchButton />
         </div>
-        <div className="flex-1 flex justify-center">
+        <Link href="/" className="flex-1 flex justify-center">
           <Image width={80} height={42} src="/SUSU.svg" alt="SUSU Logo" />
-        </div>
+        </Link>
 
         <div className="flex-1 flex justify-end">
           <Button variant="emphasized">Subscribe</Button>
