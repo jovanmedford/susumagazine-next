@@ -10,7 +10,7 @@ export default function InformationalCard({ post, className = "" }: CardProps) {
       <div
         className={`${className} flex flex-col justify-between p-6 h-50 md:h-80 bg-secondary-300 rounded`}
       >
-        <h2 className="font-serif text-2xl md:text-2xl font-bold">
+        <h2 className="font-serif text-xl font-bold">
           {post.title}
         </h2>
         <span className="font-serif">

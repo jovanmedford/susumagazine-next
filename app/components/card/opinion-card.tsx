@@ -9,13 +9,13 @@ export default function OpinionCard({ post, className = "" }: CardProps) {
   return (
     <Link href={url}>
       <div
-        className={`${className} flex flex-col gap-0.5 h-60 md:h-80 justify-between`}
+        className={`${className} flex flex-col gap-0.5 h-60 md:h-80 pb-4 justify-between`}
       >
         <div>
-          <h3 className="font-serif text-xl h-24 md:text-2xl font-bold">
+          <h3 className="font-serif text-xl h-24  font-bold">
             {post.title}
           </h3>
-          <span className="font-bold text-primary-500 font-serif text-2xl">
+          <span className="font-bold text-primary-500 font-serif text-xl">
             {author.firstName} {author.lastName}
           </span>
         </div>

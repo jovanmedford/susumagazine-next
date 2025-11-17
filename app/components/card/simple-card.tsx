@@ -19,7 +19,7 @@ export default function SimpleCard({ post, className = "" }: CardProps) {
         </div>
 
         <div className="flex-1 mt-1">
-          <h2 className="font-serif font-bold mb-2">{post.title}</h2>
+          <h2 className="font-serif font-bold mb-2 text-xl">{post.title}</h2>
           <p className="font-serif">
             By {author.firstName} {author.lastName}
           </p>
