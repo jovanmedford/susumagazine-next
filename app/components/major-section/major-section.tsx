@@ -7,7 +7,7 @@ export default function MajorSection({
 }: MajorSectionProps) {
   return (
     <Container as="section" className="mt-12">
-      <hr className="h-1 bg-primary-300 mb-2 border-0" />
+      <hr className="h-0.5 bg-primary-300 mb-2 border-0" />
       <h2 className="text-2xl mb-12 font-bold">{heading}</h2>
       {children}
     </Container>
