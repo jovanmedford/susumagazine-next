@@ -1,5 +1,4 @@
 // Description: WordPress API functions
-
 import site from "@/site";
 import { failure, Result, success } from "./util";
 
@@ -29,7 +28,6 @@ async function wordpressFetch<T>(query?: string): Promise<Result<T>> {
     }
 
     const res = (await response.json()) as WordPressResponse<T>;
-
     return success(res.data);
   } catch (e) {
     console.error(e);
@@ -137,6 +135,32 @@ export async function getPostBySlug(slug: string) {
   return resp;
 }
 
+export async function getAllMagazines() {
+  const query = /* GraphQL */ `
+    query GetAllMagazines {
+      magazines {
+        nodes {
+          id
+          magazineDetails {
+            link
+            year
+          }
+          featuredImage {
+            node {
+              sourceUrl
+              altText
+            }
+          }
+        }
+      }
+    }
+  `;
+  const resp = await wordpressFetch<WordPressGetAllMagazinesResult>(query);
+  return resp;
+}
+
+/** Local */
+
 export function getLinkFromPost(post: WordPressPost) {
   return `/articles/${post.slug}`;
 }
@@ -157,10 +181,11 @@ export function getCategoryFromPost(post: WordPressPost) {
   return post.categories.nodes[0].name;
 }
 
-export function getImageSrcFromPost(post: WordPressPost) {
+export function getImageSrcFromPost<T extends WordPressEntityWithImage>(
+  post: T
+) {
   if (!post.featuredImage) {
-    console.log({ post });
-    throw Error(`Need a default image ${post.title}`);
+    throw Error(`Need a default image ${post.id}`);
   }
   return post.featuredImage.node;
 }
@@ -207,8 +232,15 @@ export function getAvatarFromAuthor(author: WordPressAuthor) {
   return author.avatar;
 }
 
+/** Types */
+
 export interface WordPressGetPostResult {
   postBy: WordPressPost;
+}
+
+export interface WordPressEntityWithImage {
+  id: string;
+  featuredImage?: { node: WordPressImageData };
 }
 
 export interface WordPressPost {
@@ -246,6 +278,23 @@ export interface WordPressGetDynamicPageResult {
         secondary: WordPressPageBlock;
       };
     };
+  };
+}
+
+export interface WordPressGetAllMagazinesResult {
+  magazines: {
+    nodes: WordPressMagazine[];
+  };
+}
+
+export interface WordPressMagazine {
+  id: string;
+  magazineDetails: {
+    link: string;
+    year: number;
+  };
+  featuredImage?: {
+    node: WordPressImageData;
   };
 }
 

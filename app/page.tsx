@@ -16,8 +16,6 @@ export default async function Home() {
 
   const data = res.data.dynamicPageBy.pageData.blocks;
 
-  console.log(data);
-
   return (
     <div>
       <Header />

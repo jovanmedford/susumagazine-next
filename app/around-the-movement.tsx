@@ -31,7 +31,7 @@ const activities: ActivityData[] = [
     imgAlt: "Organization chart",
   },
   {
-    to: "/magazine-libary",
+    to: "/magazine-library",
     title: "Magazine library",
     description: "All issues of SUSU magazine in one place",
     imgSrc: "/magazine-library.svg",
