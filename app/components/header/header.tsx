@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Button from "../button";
 import MenuButton from "../menu-button";
-import SearchButton from "../search-button";
 import HeaderNavbar from "./header-navbar";
 import Container from "../container";
 import Link from "next/link";
+import SearchPopover from "../search-popover";
 
 export default function Header() {
   return (
@@ -12,7 +12,7 @@ export default function Header() {
       <Container as="header" className="flex justify-between items-center mt-3">
         <div className="flex gap-4 flex-1">
           <MenuButton />
-          <SearchButton />
+          <SearchPopover />
         </div>
         <Link href="/" className="flex-1 flex justify-center">
           <Image width={80} height={42} src="/SUSU.svg" alt="SUSU Logo" />
